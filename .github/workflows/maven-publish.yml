@@ -28,3 +28,6 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: start rest server
+      run: ./mvnw spring-boot:run
