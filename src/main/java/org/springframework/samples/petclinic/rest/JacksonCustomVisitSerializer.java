@@ -96,8 +96,6 @@ public class JacksonCustomVisitSerializer extends StdSerializer<Visit> {
 		jgen.writeEndObject(); // owner
 		jgen.writeEndObject(); // pet
 
-
-
 		Vet vet = visit.getVet();
 		jgen.writeObjectFieldStart("vet");
 		if(vet.getId() == null){
@@ -107,7 +105,6 @@ public class JacksonCustomVisitSerializer extends StdSerializer<Visit> {
 		}
 		jgen.writeStringField("firstName", vet.getFirstName());
 		jgen.writeStringField("lastName", vet.getLastName());
-
 
 		jgen.writeArrayFieldStart("specialties");
 		for(Specialty specialty: vet.getSpecialties()){
@@ -119,6 +116,6 @@ public class JacksonCustomVisitSerializer extends StdSerializer<Visit> {
 		jgen.writeEndArray();
 
 		jgen.writeEndObject(); //vet
-		jgen.writeEndObject(); // visit
+		jgen.writeEndObject(); //visit
 	}
 }
