@@ -98,6 +98,12 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException {
+		return visitRepository.getVisitsByVet(vetId);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Collection<Visit> findAllVisits() throws DataAccessException {
 		return visitRepository.findAll();
 	}

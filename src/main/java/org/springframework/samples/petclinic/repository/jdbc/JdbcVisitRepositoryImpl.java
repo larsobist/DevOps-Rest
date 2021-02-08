@@ -119,6 +119,15 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
 		return visit;
 	}
 
+	// EINGEFUEGT
+	@Override
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
+		Map<String, Object> params = new HashMap<>();
+		return this.namedParameterJdbcTemplate.query(
+			"SELECT * FROM visits WHERE vet_id = vetId",
+			params, new JdbcVisitRowMapperExt());
+	}
+
 	@Override
 	public Collection<Visit> findAll() throws DataAccessException {
 		Map<String, Object> params = new HashMap<>();

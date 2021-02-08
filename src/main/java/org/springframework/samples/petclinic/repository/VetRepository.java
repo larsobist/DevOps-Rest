@@ -45,5 +45,4 @@ public interface VetRepository {
 	
 	void delete(Vet vet) throws DataAccessException;
 
-
 }
