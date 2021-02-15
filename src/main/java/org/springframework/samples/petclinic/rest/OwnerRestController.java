@@ -123,7 +123,7 @@ public class OwnerRestController {
 		currentOwner.setLastName(owner.getLastName());
 		currentOwner.setTelephone(owner.getTelephone());
 		this.clinicService.saveOwner(currentOwner);
-		return new ResponseEntity<Owner>(currentOwner, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Owner>(currentOwner, HttpStatus.OK);
 	}
 
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
