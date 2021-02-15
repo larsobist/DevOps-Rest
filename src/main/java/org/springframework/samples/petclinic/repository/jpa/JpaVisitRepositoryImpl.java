@@ -21,6 +21,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
@@ -79,6 +80,14 @@ public class JpaVisitRepositoryImpl implements VisitRepository {
 	@Override
 	public void delete(Visit visit) throws DataAccessException {
         this.em.remove(this.em.contains(visit) ? visit : this.em.merge(visit));
-	}
+    }
+    
+    // Hinzugefuegt
+    @Override
+    public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
+        TypedQuery<Visit> query = this.em.createQuery("SELECT visits FROM Visit visit WHERE visit.vet.id LIKE :vetId", Visit.class);
+        query.setParameter("vetId", vetId);
+        return query.getResultList();
+    }
 
 }

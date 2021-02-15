@@ -16,8 +16,12 @@
 
 package org.springframework.samples.petclinic.repository.springdatajpa;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
@@ -43,5 +47,10 @@ public class SpringDataVisitRepositoryImpl implements VisitRepositoryOverride {
         }
 	}
 
-
+	@Override
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException {
+		TypedQuery<Visit> query = this.em.createQuery("SELECT visit FROM Visit visit WHERE visit.vet.id LIKE :vetId", Visit.class);
+		query.setParameter("vetId", vetId);
+		return query.getResultList();
+	}
 }

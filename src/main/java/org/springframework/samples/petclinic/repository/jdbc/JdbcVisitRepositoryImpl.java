@@ -79,7 +79,8 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
             .addValue("id", visit.getId())
             .addValue("visit_date", visit.getDate())
             .addValue("description", visit.getDescription())
-            .addValue("pet_id", visit.getPet().getId());
+			.addValue("pet_id", visit.getPet().getId())
+			.addValue("vet_id", visit.getVet().getId());
     }
 
     @Override
@@ -118,6 +119,15 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
 		return visit;
 	}
 
+	// EINGEFUEGT
+	@Override
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
+		Map<String, Object> params = new HashMap<>();
+		return this.namedParameterJdbcTemplate.query(
+			"SELECT * FROM visits WHERE vet_id = vetId",
+			params, new JdbcVisitRowMapperExt());
+	}
+
 	@Override
 	public Collection<Visit> findAll() throws DataAccessException {
 		Map<String, Object> params = new HashMap<>();
@@ -133,7 +143,7 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
 			visit.setId(newKey.intValue());
 		} else {
 			this.namedParameterJdbcTemplate.update(
-					"UPDATE visits SET visit_date=:visit_date, description=:description, pet_id=:pet_id WHERE id=:id ",
+					"UPDATE visits SET visit_date=:visit_date, description=:description, pet_id=:pet_id, vet_id=:vet_id WHERE id=:id ",
 					createVisitParameterSource(visit));
 		}
 	}

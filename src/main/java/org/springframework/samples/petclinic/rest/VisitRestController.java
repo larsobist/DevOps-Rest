@@ -52,6 +52,17 @@ public class VisitRestController {
 	@Autowired
 	private ClinicService clinicService;
 
+	@PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
+	@RequestMapping(value = "/vetVisits/{vetId}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<Visit>> getVisitsByVet(@PathVariable("vetId") int vetId){
+		Collection<Visit> visits = new ArrayList<Visit>();
+		visits.addAll(this.clinicService.getVisitsByVet(vetId));
+		if (visits.isEmpty()){
+			return new ResponseEntity<Collection<Visit>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Visit>>(visits, HttpStatus.OK);
+	}
+
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<Visit>> getAllVisits(){
@@ -105,6 +116,7 @@ public class VisitRestController {
 		currentVisit.setDate(visit.getDate());
 		currentVisit.setDescription(visit.getDescription());
 		currentVisit.setPet(visit.getPet());
+		currentVisit.setVet(visit.getVet());
 		this.clinicService.saveVisit(currentVisit);
 		return new ResponseEntity<Visit>(currentVisit, HttpStatus.NO_CONTENT);
 	}
