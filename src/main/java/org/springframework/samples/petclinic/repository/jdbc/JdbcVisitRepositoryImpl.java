@@ -124,7 +124,7 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
 	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
 		Map<String, Object> params = new HashMap<>();
 		return this.namedParameterJdbcTemplate.query(
-			"SELECT * FROM visits WHERE vet_id = vetId",
+			"SELECT * FROM visits WHERE vet_id = vetId ORDER BY visit_date desc",
 			params, new JdbcVisitRowMapperExt());
 	}
 

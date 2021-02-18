@@ -118,7 +118,7 @@ public class VisitRestController {
 		currentVisit.setPet(visit.getPet());
 		currentVisit.setVet(visit.getVet());
 		this.clinicService.saveVisit(currentVisit);
-		return new ResponseEntity<Visit>(currentVisit, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Visit>(currentVisit, HttpStatus.OK);
 	}
 
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
