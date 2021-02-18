@@ -143,7 +143,7 @@ public class OwnerRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetOwnerSuccess() throws Exception {
     	given(this.clinicService.findOwnerById(1)).willReturn(owners.get(0));
-        this.mockMvc.perform(get("/api/owners/1")
+        this.mockMvc.perform(get("/owners/1")
         	.accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
