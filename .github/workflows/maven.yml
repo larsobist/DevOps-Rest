@@ -1,0 +1,39 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    - run: git config --global user.email "p.seegers87@gmail.com"
+    - run: git config --global user.name "PSeegers97"
+    - run: git add -A && git commit -m "Updated code"
+
+
+    - name: Deploy to Heroku
+      uses: AkhileshNS/heroku-deploy@v3.11.10
+      with:
+        dontuseforce: false
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "spring-boot-hsbremen"
+        heroku_email: "inopa@web.de"
+        usedocker: true
+
