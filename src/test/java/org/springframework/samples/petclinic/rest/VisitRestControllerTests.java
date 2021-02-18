@@ -111,7 +111,6 @@ public class VisitRestControllerTests {
     	visit.setPet(pet);
     	visit.setDate(new Date());
     	visit.setDescription("rabies shot");
-		visit.setDescription("rabies shot");
 		visit.setVet(vet);
     	visits.add(visit);
 
@@ -120,7 +119,6 @@ public class VisitRestControllerTests {
     	visit.setPet(pet);
     	visit.setDate(new Date());
     	visit.setDescription("neutered");
-		visit.setDescription("neutered");
 		visit.setVet(vet);
     	visits.add(visit);
 
@@ -148,6 +146,36 @@ public class VisitRestControllerTests {
         	.accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound());
     }
+
+
+
+	// Tests fuer getVisitsByVet
+
+	@Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    public void testGetVisitsByVetSuccess() throws Exception {
+    	given(this.clinicService.getVisitsByVet(1)).willReturn(visits.get(0));
+        this.mockMvc.perform(get("/api/vetVisits/1")
+        	.accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(jsonPath("$.id").value(1))
+			.andExpect(jsonPath("$.date").value("2013/01/01"))
+            .andExpect(jsonPath("$.description").value("rabies shot"));
+    }
+
+	@Test
+		@WithMockUser(roles="OWNER_ADMIN")
+		public void testGetVisitsByVetNotFound() throws Exception {
+			given(this.clinicService.getVisitsByVet(-1)).willReturn(null);
+			this.mockMvc.perform(get("/api/vetVisits/-1")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+		}
+
+
+
+
 
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
