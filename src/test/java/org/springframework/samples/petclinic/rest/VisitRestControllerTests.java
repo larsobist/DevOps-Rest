@@ -128,6 +128,8 @@ public class VisitRestControllerTests {
 
     }
 
+
+
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetVisitSuccess() throws Exception {
@@ -223,7 +225,27 @@ public class VisitRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testUpdateVisitError() throws Exception {
     	Visit newVisit = visits.get(0);
-    	Pet newPet = visits.get(0).pet;
+
+        Owner owner = new Owner();
+        owner.setId(1);
+        owner.setFirstName("Eduardo");
+        owner.setLastName("Rodriquez");
+        owner.setAddress("2693 Commerce St.");
+        owner.setCity("McFarland");
+        owner.setTelephone("6085558763");
+
+        PetType petType = new PetType();
+        petType.setId(2);
+        petType.setName("dog");
+
+
+        Pet pet = new Pet();
+        pet.setId(8);
+        pet.setName("Rosy");
+        pet.setBirthDate(new Date());
+        pet.setOwner(owner);
+        pet.setType(petType);
+
     	ObjectMapper mapper = new ObjectMapper();
     	String newVisitAsJSON = mapper.writeValueAsString(newVisit);
     	this.mockMvc.perform(put("/api/visits/2")
