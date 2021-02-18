@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B -X package --file pom.xml
 
     - run: git config --global user.email "p.seegers87@gmail.com"
     - run: git config --global user.name "PSeegers97"
