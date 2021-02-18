@@ -269,7 +269,7 @@ public class OwnerRestControllerTests {
         this.mockMvc.perform(put("/api/owners/" + ownerId)
             .content(newOwnerAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(content().contentType("application/json"))
-            .andExpect(status().isNoContent());
+            .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/api/owners/" + ownerId)
             .accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON_VALUE))
