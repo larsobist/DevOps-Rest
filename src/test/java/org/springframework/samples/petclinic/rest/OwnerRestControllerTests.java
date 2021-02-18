@@ -216,7 +216,7 @@ public class OwnerRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testCreateOwnerSuccess() throws Exception {
     	Owner newOwner = owners.get(0);
-    	newOwner.setId(null);
+    	newOwner.setId(13);
     	ObjectMapper mapper = new ObjectMapper();
     	String newOwnerAsJSON = mapper.writeValueAsString(newOwner);
     	this.mockMvc.perform(post("/api/owners/")
@@ -242,8 +242,8 @@ public class OwnerRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testCreateOwnerError() throws Exception {
     	Owner newOwner = owners.get(0);
-    	newOwner.setId(null);
-    	newOwner.setFirstName(null);
+    	newOwner.setId(13);
+    	newOwner.setFirstName("Peter");
     	ObjectMapper mapper = new ObjectMapper();
     	String newOwnerAsJSON = mapper.writeValueAsString(newOwner);
     	this.mockMvc.perform(post("/api/owners/")

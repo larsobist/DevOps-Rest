@@ -156,8 +156,8 @@ public class VetRestControllerTests {
     @WithMockUser(roles="VET_ADMIN")
     public void testCreateVetError() throws Exception {
     	Vet newVet = vets.get(0);
-    	newVet.setId(null);
-    	newVet.setFirstName(null);
+    	newVet.setId(999);
+    	newVet.setFirstName("Guenther");
     	ObjectMapper mapper = new ObjectMapper();
     	String newVetAsJSON = mapper.writeValueAsString(newVet);
     	this.mockMvc.perform(post("/api/vets/")
@@ -170,7 +170,7 @@ public class VetRestControllerTests {
     public void testUpdateVetSuccess() throws Exception {
     	given(this.clinicService.findVetById(1)).willReturn(vets.get(0));
     	Vet newVet = vets.get(0);
-    	newVet.setFirstName("James");
+    	newVet.setFirstName("Dieter");
     	ObjectMapper mapper = new ObjectMapper();
     	String newVetAsJSON = mapper.writeValueAsString(newVet);
     	this.mockMvc.perform(put("/api/vets/1")
@@ -191,7 +191,7 @@ public class VetRestControllerTests {
     @WithMockUser(roles="VET_ADMIN")
     public void testUpdateVetError() throws Exception {
     	Vet newVet = vets.get(0);
-    	newVet.setFirstName("");
+    	newVet.setFirstName("Peter");
     	ObjectMapper mapper = new ObjectMapper();
     	String newVetAsJSON = mapper.writeValueAsString(newVet);
     	this.mockMvc.perform(put("/api/vets/1")

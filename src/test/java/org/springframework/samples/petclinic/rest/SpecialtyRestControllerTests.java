@@ -154,8 +154,8 @@ public class SpecialtyRestControllerTests {
     @WithMockUser(roles="VET_ADMIN")
     public void testCreateSpecialtyError() throws Exception {
     	Specialty newSpecialty = specialties.get(0);
-    	newSpecialty.setId(null);
-    	newSpecialty.setName(null);
+    	newSpecialty.setId(5);
+    	newSpecialty.setName("oncology");
     	ObjectMapper mapper = new ObjectMapper();
     	String newSpecialtyAsJSON = mapper.writeValueAsString(newSpecialty);
     	this.mockMvc.perform(post("/api/specialties/")

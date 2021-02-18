@@ -100,7 +100,7 @@ public class VisitRestControllerTests {
     	pet.setBirthDate(new Date());
     	pet.setOwner(owner);
 		pet.setType(petType);
-		
+
 		Vet vet = new Vet();
 		vet.setId(2);
 		vet.setFirstName("Helen");
@@ -190,8 +190,8 @@ public class VisitRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testCreateVisitError() throws Exception {
     	Visit newVisit = visits.get(0);
-    	newVisit.setId(null);
-    	newVisit.setPet(null);
+    	newVisit.setId(999);
+    	newVisit.setPet("kastration");
     	ObjectMapper mapper = new ObjectMapper();
     	String newVisitAsJSON = mapper.writeValueAsString(newVisit);
     	this.mockMvc.perform(post("/api/visits/")
@@ -224,7 +224,7 @@ public class VisitRestControllerTests {
     @WithMockUser(roles="OWNER_ADMIN")
     public void testUpdateVisitError() throws Exception {
     	Visit newVisit = visits.get(0);
-    	newVisit.setPet(null);
+    	newVisit.setPet("dog");
     	ObjectMapper mapper = new ObjectMapper();
     	String newVisitAsJSON = mapper.writeValueAsString(newVisit);
     	this.mockMvc.perform(put("/api/visits/2")

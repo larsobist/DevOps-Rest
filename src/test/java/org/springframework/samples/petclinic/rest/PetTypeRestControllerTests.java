@@ -188,8 +188,8 @@ public class PetTypeRestControllerTests {
     @WithMockUser(roles="VET_ADMIN")
     public void testCreatePetTypeError() throws Exception {
     	PetType newPetType = petTypes.get(0);
-    	newPetType.setId(null);
-    	newPetType.setName(null);
+    	newPetType.setId(6);
+    	newPetType.setName("Giraffe");
     	ObjectMapper mapper = new ObjectMapper();
     	String newPetTypeAsJSON = mapper.writeValueAsString(newPetType);
     	this.mockMvc.perform(post("/api/pettypes/")
@@ -222,7 +222,7 @@ public class PetTypeRestControllerTests {
     @WithMockUser(roles="VET_ADMIN")
     public void testUpdatePetTypeError() throws Exception {
     	PetType newPetType = petTypes.get(0);
-    	newPetType.setName("");
+    	newPetType.setName("Snake");
     	ObjectMapper mapper = new ObjectMapper();
     	String newPetTypeAsJSON = mapper.writeValueAsString(newPetType);
     	this.mockMvc.perform(put("/api/pettypes/1")

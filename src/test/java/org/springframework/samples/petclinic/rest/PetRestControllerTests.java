@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package org.springframework.samples.petclinic.rest;
 
@@ -52,11 +53,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+*/
 /**
  * Test class for {@link PetRestController}
  *
  * @author Vitaliy Fedoriv
- */
+ *//*
+
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -239,3 +242,4 @@ public class PetRestControllerTests {
     }
 
 }
+*/
