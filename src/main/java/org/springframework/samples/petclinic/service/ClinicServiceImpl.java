@@ -67,7 +67,7 @@ public class ClinicServiceImpl implements ClinicService {
         this.vetRepository = vetRepository;
         this.ownerRepository = ownerRepository;
         this.visitRepository = visitRepository;
-        this.specialtyRepository = specialtyRepository; 
+        this.specialtyRepository = specialtyRepository;
 		this.petTypeRepository = petTypeRepository;
     }
 
@@ -98,7 +98,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException {
+	public Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException {
 		return visitRepository.getVisitsByVet(vetId);
 	}
 
@@ -255,14 +255,14 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional
 	public void savePet(Pet pet) throws DataAccessException {
 		petRepository.save(pet);
-		
+
 	}
 
 	@Override
 	@Transactional
 	public void saveVisit(Visit visit) throws DataAccessException {
 		visitRepository.save(visit);
-		
+
 	}
 
 	@Override
@@ -276,7 +276,7 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional
 	public void saveOwner(Owner owner) throws DataAccessException {
 		ownerRepository.save(owner);
-		
+
 	}
 
 	@Override
@@ -290,8 +290,8 @@ public class ClinicServiceImpl implements ClinicService {
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);
 	}
-	
-	
+
+
 
 
 }

@@ -47,8 +47,8 @@ public interface VisitRepository {
 	Visit findById(int id) throws DataAccessException;
 	
     Collection<Visit> findAll() throws DataAccessException;
-    
-    Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException;
+
+    Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException;
 
 	void delete(Visit visit) throws DataAccessException;
 

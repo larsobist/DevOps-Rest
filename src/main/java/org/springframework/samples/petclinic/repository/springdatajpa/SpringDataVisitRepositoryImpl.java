@@ -48,9 +48,10 @@ public class SpringDataVisitRepositoryImpl implements VisitRepositoryOverride {
 	}
 
 	@Override
-	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException {
-		TypedQuery<Visit> query = this.em.createQuery("SELECT visit FROM Visit visit WHERE visit.vet.id LIKE :vetId ORDER BY date desc", Visit.class);
-		query.setParameter("vetId", vetId);
+	public Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException {
+	    int vetIdInt = Integer.parseInt(vetId);
+		TypedQuery<Visit> query = this.em.createQuery("SELECT visit FROM Visit visit WHERE visit.vet.id LIKE :vetIdInt ORDER BY date desc", Visit.class);
+		query.setParameter("vetId", vetIdInt);
 		return query.getResultList();
 	}
 }
