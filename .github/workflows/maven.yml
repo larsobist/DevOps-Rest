@@ -25,7 +25,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B  package --file pom.xml
 
-    - run: git config --global user.email "p.seegers87@gmail.com"
+    - name: commit changes
+      run: git config --global user.email "p.seegers87@gmail.com"
     - run: git config --global user.name "PSeegers97"
     - run: git add -A && git commit -m "Updated code"
 
