@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Test Docker 
-        run: docker build . --file dev.Dockerfile --t petclinic-rest-test
+        run: docker build . --file dev.Dockerfile --tag petclinic-rest-test
       - name: Run Test Docker 
         run: docker run -d --name petclinic-rest-test -p 9966:9966 petclinic-rest-test:latest 
 # HIER UNIT TEST?
