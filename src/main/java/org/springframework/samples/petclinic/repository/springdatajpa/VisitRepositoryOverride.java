@@ -28,9 +28,9 @@ import org.springframework.samples.petclinic.model.Visit;
 
 @Profile("spring-data-jpa")
 public interface VisitRepositoryOverride {
-	
+
 	void delete(Visit visit);
 
-	Collection<Visit> getVisitsByVet(int vetId);
+	Collection<Visit> getVisitsByVet(String vetId);
 
 }
