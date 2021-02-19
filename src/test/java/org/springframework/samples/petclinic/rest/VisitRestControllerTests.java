@@ -188,7 +188,7 @@ public class VisitRestControllerTests {
     		.andExpect(status().isCreated());
     }
 
-    @Test(expected = IOException.class)
+   /* @Test(expected = IOException.class)
     @WithMockUser(roles="OWNER_ADMIN")
     public void testCreateVisitError() throws Exception {
     	Visit newVisit = visits.get(0);
@@ -198,7 +198,7 @@ public class VisitRestControllerTests {
     	this.mockMvc.perform(post("/api/visits/")
         		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
         		.andExpect(status().isBadRequest());
-     }
+     }*/
 
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
@@ -221,7 +221,7 @@ public class VisitRestControllerTests {
             .andExpect(jsonPath("$.description").value("rabies shot test"));
     }
 
-    @Test(expected = IOException.class)
+/*    @Test(expected = IOException.class)
     @WithMockUser(roles="OWNER_ADMIN")
     public void testUpdateVisitError() throws Exception {
     	Visit newVisit = visits.get(0);
@@ -251,7 +251,7 @@ public class VisitRestControllerTests {
     	this.mockMvc.perform(put("/api/visits/2")
     		.content(newVisitAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
         	.andExpect(status().isBadRequest());
-     }
+     }*/
 
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
