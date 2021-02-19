@@ -98,7 +98,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException {
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException {
 		return visitRepository.getVisitsByVet(vetId);
 	}
 

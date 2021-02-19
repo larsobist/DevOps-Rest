@@ -31,6 +31,6 @@ public interface VisitRepositoryOverride {
 
 	void delete(Visit visit);
 
-	Collection<Visit> getVisitsByVet(String vetId);
+	Collection<Visit> getVisitsByVet(int vetId);
 
 }

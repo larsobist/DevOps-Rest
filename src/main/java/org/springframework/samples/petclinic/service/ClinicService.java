@@ -39,7 +39,7 @@ public interface ClinicService {
 	void savePet(Pet pet) throws DataAccessException;
 	void deletePet(Pet pet) throws DataAccessException;
 
-	Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException;
+	Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException;
 
 	Collection<Visit> findVisitsByPetId(int petId);
 	Visit findVisitById(int visitId) throws DataAccessException;

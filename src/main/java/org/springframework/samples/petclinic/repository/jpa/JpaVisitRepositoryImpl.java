@@ -65,7 +65,7 @@ public class JpaVisitRepositoryImpl implements VisitRepository {
         query.setParameter("id", petId);
         return query.getResultList();
     }
-    
+
 	@Override
 	public Visit findById(int id) throws DataAccessException {
 		return this.em.find(Visit.class, id);
@@ -81,13 +81,12 @@ public class JpaVisitRepositoryImpl implements VisitRepository {
 	public void delete(Visit visit) throws DataAccessException {
         this.em.remove(this.em.contains(visit) ? visit : this.em.merge(visit));
     }
-    
+
     // Hinzugefuegt
     @Override
-    public Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException{
-        int vetIdInt = Integer.parseInt(vetId);
-        TypedQuery<Visit> query = this.em.createQuery("SELECT visits FROM Visit visit WHERE visit.vet.id LIKE :vetIdInt ORDER BY v.date desc", Visit.class);
-        query.setParameter("vetId", vetIdInt);
+    public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
+        TypedQuery<Visit> query = this.em.createQuery("SELECT visits FROM Visit visit WHERE visit.vet.id LIKE :vetId ORDER BY v.date desc", Visit.class);
+        query.setParameter("vetId", vetId);
         return query.getResultList();
     }
 

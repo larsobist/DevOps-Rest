@@ -121,11 +121,10 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
 
 	// EINGEFUEGT
 	@Override
-	public Collection<Visit> getVisitsByVet(String vetId) throws DataAccessException{
-        int vetIdInt = Integer.parseInt(vetId);
+	public Collection<Visit> getVisitsByVet(int vetId) throws DataAccessException{
 		Map<String, Object> params = new HashMap<>();
 		return this.namedParameterJdbcTemplate.query(
-			"SELECT * FROM visits WHERE vet_id = :vetIdInt ORDER BY visit_date desc",
+			"SELECT * FROM visits WHERE vet_id = vetId ORDER BY visit_date desc",
 			params, new JdbcVisitRowMapperExt());
 	}
 
