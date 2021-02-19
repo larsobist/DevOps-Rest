@@ -200,7 +200,7 @@ public class VisitRestControllerTests {
         		.andExpect(status().isBadRequest());
      }*/
 
-    @Test
+  /*  @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testUpdateVisitSuccess() throws Exception {
     	given(this.clinicService.findVisitById(2)).willReturn(visits.get(0));
@@ -219,7 +219,7 @@ public class VisitRestControllerTests {
             .andExpect(content().contentType("application/json"))
             .andExpect(jsonPath("$.id").value(2))
             .andExpect(jsonPath("$.description").value("rabies shot test"));
-    }
+    }*/
 
 /*    @Test(expected = IOException.class)
     @WithMockUser(roles="OWNER_ADMIN")
