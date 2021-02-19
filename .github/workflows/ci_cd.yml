@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
       - name: Build Test Docker 
         run: docker build . --file dev.Dockerfile --t petclinic-rest-test
       - name: Run Test Docker 
@@ -29,6 +25,6 @@ jobs:
         with: 
           node-version: '12.x'
       - name: Install Newman  
-        uses: npm install -g newman
+        run: npm install -g newman
       - name: Run Postman Tests
-        uses: newman run https://www.getpostman.com/collections/db06d79b830bd6deb84e
+        run: newman run https://www.getpostman.com/collections/db06d79b830bd6deb84e
