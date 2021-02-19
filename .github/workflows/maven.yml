@@ -25,11 +25,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B  package --file pom.xml
 
-    - name: commit changes
-      run: git config --global user.email "p.seegers87@gmail.com"
-    - run: git config --global user.name "PSeegers97"
-    - run: git add -A && git commit -m "Updated code"
-
 
     - name: Deploy to Heroku
       uses: AkhileshNS/heroku-deploy@v3.11.10
