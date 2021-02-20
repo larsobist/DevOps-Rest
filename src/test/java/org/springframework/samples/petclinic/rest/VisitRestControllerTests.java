@@ -156,12 +156,13 @@ public class VisitRestControllerTests {
 	@Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetVisitsByVetSuccess() throws Exception {
-    	given(this.clinicService.getVisitsByVet(1)).willReturn(visits.get(0));
-        this.mockMvc.perform(get("/api/vetVisits/1")
+    	given(this.clinicService.getVisitsByVet(2)).willReturn(visits);
+        this.mockMvc.perform(get("/api/visits/vetVisits/2")
         	.accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$.[0].id").value(1))
+            .andExpect(jsonPath("$.[0].id").value(2))
+			// .andExpect(jsonPath("$.[0].date").value("2023/01/02"))
             .andExpect(jsonPath("$.[0].description").value("rabies shot"));
     }
 
