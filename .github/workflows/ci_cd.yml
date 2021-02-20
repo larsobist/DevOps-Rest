@@ -1,5 +1,5 @@
 
-name: Heroku Rest Build & Deploy
+name: REST Tests & Deploy
 
 on: 
   push: 
