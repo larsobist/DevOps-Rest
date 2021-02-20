@@ -1,0 +1,69 @@
+
+name: REST Tests & Deploy
+
+on: 
+  push: 
+     branches:
+      - '*'
+      - '!main'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Test Docker Container
+        run: docker build . --file dev.Dockerfile --tag petclinic-rest-test
+      - name: Run Test Docker Container
+        run: docker run -d --name petclinic-rest-test -p 9966:9966 petclinic-rest-test:latest 
+      - name: Rest Unit Tests
+        run: docker exec -w /spring-petclinic-rest/ petclinic-rest-test mvn test
+
+      - name: Setup Node Enviroment
+        uses: actions/setup-node@v1
+        with: 
+          node-version: '12.x'
+      - name: Install Newman for API Tests
+        run: npm install -g newman
+      - name: Run API Tests
+        run: newman run https://www.getpostman.com/collections/db06d79b830bd6deb84e
+
+  
+  Deploy:
+    needs: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker Prod Image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME_PROD
+      - name: Log into Github Docker Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}“ | docker login docker.pkg.github.com -u ${{ github.actor }}
+      - name: Push Docker image
+        run: |
+          IMAGE_ID.docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME_PROD
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr ‚[A-Z]‘ ‚[a-z]‘)
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}“ | sed -e ’s,.*/\(.*\),\1,’)
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}“ == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e ’s/^v//‚)
+          # Use Docker 'latest' tag convention
+          [ „$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $IMAGE_NAME_PROD $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+      - name: Login to Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+        run: heroku container:login
+      - name: Push to Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+        run: heroku Container:push -a ${{secrets.HEROKU_DEV_ENV_REST}} web
+      - name: Release
+        env:
+          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
+        run: heroku container:release -a ${{secrets.HEROKU_DEV_ENV_REST}} web
