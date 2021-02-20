@@ -19,7 +19,7 @@ jobs:
       - name: Run Test Docker 
         run: docker run -d --name petclinic-rest-test -p 9966:9966 petclinic-rest-test:latest 
       - name: Unit Test
-        run: docker exec -w /spring-petclinic-rest/ petclinic mvn test
+        run: docker exec -w /spring-petclinic-rest/ petclinic-rest-test mvn test
 
       - name: Setup Node-enviroment for Postman Tests 
         uses: actions/setup-node@v1
