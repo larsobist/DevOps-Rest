@@ -1,5 +1,5 @@
 
-name: REST Unit & API Tests & Deploy
+name: REST Unit and API Tests & Deploy
 
 on: 
   push: 
