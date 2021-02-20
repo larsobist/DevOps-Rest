@@ -109,7 +109,7 @@ public class VisitRestControllerTests {
     	Visit visit = new Visit();
     	visit.setId(2);
     	visit.setPet(pet);
-    	visit.setDate(new Date());
+    	visit.setDate("2023/01/02");
     	visit.setDescription("rabies shot");
 		visit.setVet(vet);
     	visits.add(visit);
