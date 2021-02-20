@@ -1,5 +1,5 @@
 
-name: REST Unit and API Tests & Deploy
+name: REST Tests & Deploy
 
 on: 
   push: 
@@ -21,12 +21,13 @@ jobs:
       - name: Rest Unit Tests
         run: docker exec -w /spring-petclinic-rest/ petclinic-rest-test mvn test
 
-      - name: Setup Enviroment for API Tests 
+      - name: Setup Node Enviroment
         uses: actions/setup-node@v1
         with: 
           node-version: '12.x'
+      - name: Install Newman for API Tests
         run: npm install -g newman
-      - name: Run API Tests from Postman Collection
+      - name: Run API Tests
         run: newman run https://www.getpostman.com/collections/db06d79b830bd6deb84e
 
   # Deploy-on-Heroku:
