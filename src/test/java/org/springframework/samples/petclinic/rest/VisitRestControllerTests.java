@@ -162,7 +162,6 @@ public class VisitRestControllerTests {
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
             .andExpect(jsonPath("$.[0].id").value(1))
-			.andExpect(jsonPath("$.[0].date").value("2013/01/01"))
             .andExpect(jsonPath("$.[0].description").value("rabies shot"));
     }
 
