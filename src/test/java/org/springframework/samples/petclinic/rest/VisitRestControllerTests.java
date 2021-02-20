@@ -159,9 +159,9 @@ public class VisitRestControllerTests {
         	.accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))
-            .andExpect(jsonPath("$.id").value(1))
-			.andExpect(jsonPath("$.date").value("2013/01/01"))
-            .andExpect(jsonPath("$.description").value("rabies shot"));
+            .andExpect(jsonPath("$.[0].id").value(1))
+			.andExpect(jsonPath("$.[0].date").value("2013/01/01"))
+            .andExpect(jsonPath("$.[0].description").value("rabies shot"));
     }
 
 	@Test
