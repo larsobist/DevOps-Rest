@@ -156,7 +156,7 @@ public class VisitRestControllerTests {
 	@Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetVisitsByVetSuccess() throws Exception {
-    	given(this.clinicService.getVisitsByVet(1)).willReturn(visits);
+    	given(this.clinicService.getVisitsByVet(0)).willReturn(visits);
         this.mockMvc.perform(get("/api/visits/vetVisits/1")
         	.accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
