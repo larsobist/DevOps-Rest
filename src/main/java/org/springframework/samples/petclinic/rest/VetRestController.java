@@ -85,6 +85,7 @@ public class VetRestController {
 		}
 		this.clinicService.saveVet(vet);
 		headers.setLocation(ucBuilder.path("/api/vets/{id}").buildAndExpand(vet.getId()).toUri());
+		System.out.println('hello');
 		return new ResponseEntity<Vet>(vet, headers, HttpStatus.CREATED);
 	}
 
