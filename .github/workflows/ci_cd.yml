@@ -17,6 +17,8 @@ jobs:
       - name: Rest Unit Tests
         run: docker exec -w /spring-petclinic-rest/ petclinic-rest-test mvn test
 
+
+
       - name: Setup Node Enviroment
         uses: actions/setup-node@v1
         with: 
